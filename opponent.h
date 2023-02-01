@@ -51,7 +51,6 @@ class Opponent : public GameElement {
   Opponent();
   Opponent(int startingX, int startingY);
   void Draw(Image& image) override;
-  void makeOpponent();
   void SetMoveDirection(bool x) { this->movingRight_ = x; };
 
   int GetLaunch() { return launch_; };

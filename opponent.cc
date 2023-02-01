@@ -24,7 +24,6 @@ Opponent::Opponent() : GameElement(0, 0, 50, 50) {
   this->file_ = "opponentCharacter";
   this->launch_ = rand() % 25;
   // Draw character
-  makeOpponent();
 }
 
 Opponent::Opponent(int startingX, int startingY)
@@ -34,54 +33,8 @@ Opponent::Opponent(int startingX, int startingY)
   int temp = rand() % 25;
   this->launch_ = temp;
   // Draw character
-  makeOpponent();
 }
 
-// Begin Draw Function
-void Opponent::makeOpponent() {
-  // creating size of Opponent
-  Image opponent(50, 50);
-
-  // code from milestone one to Draw Opponent
-  // ***need to ADD implemnetation based on where opponent is on the screen***
-  opponent.DrawRectangle(5, 22, 25, 10, 186, 156, 115);
-  opponent.DrawRectangle(21, 22, 25, 10, 186, 156, 115);
-  opponent.DrawCircle(25, 24, 14, 241, 223, 199);
-  opponent.DrawCircle(17, 10, 10, 67, 64, 62);
-  opponent.DrawCircle(35, 10, 10, 67, 64, 62);
-  opponent.DrawCircle(17, 10, 5, 227, 57, 0);
-  opponent.DrawCircle(35, 10, 5, 227, 57, 0);
-  opponent.DrawLine(0, 0, 24, 9, 67, 64, 62, 8);
-  opponent.DrawLine(25, 10, 49, 0, 67, 64, 62, 8);
-  opponent.DrawRectangle(23, 14, 7, 11, 186, 156, 115);
-  for (int x = 0; x < 50; x++) {
-    // There is no pixels to edit outside of this Range
-    for (int y = 0; y < 50; y++) {
-      int red = opponent.GetRed(x, y);
-      // If image red is == 255 then the picture is background then skip
-      if (red == 255) {
-        continue;
-      } else {
-        // random number
-        int random = rand() % 2 + 1;
-        // 1/4 chance of changing color
-        if (random % 2 == 0) {
-          // get Colors, then randomize off base
-          int green = opponent.GetGreen(x, y);
-          int blue = opponent.GetBlue(x, y);
-          red = red + rand() % 14 + 1;
-          blue = blue + rand() % 15 + 1;
-          green = green + rand() % 15 + 1;
-          Color tempColor(red, green, blue);
-          opponent.SetColor(x, y, tempColor);
-        } else {
-          continue;
-        }
-      }
-    }
-  }
-  opponent.SaveImageBmp(file_);
-}
 
 // code from milestone one to Draw Opponent
 void Opponent::Draw(Image& image) {

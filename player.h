@@ -23,18 +23,7 @@ using graphics::Image, graphics::Color, std::string, std::vector;
 class Player : public GameElement {
  private:
   bool isEvil_;
-
-  // Draw the image after the constructor
-  void makePlayer();
-  // Internal functions used by draw
-  void rectangleMirror(Image& image, int midpoint, int startHeight,
-                       int bottomHeight, int width, Color& colorRight,
-                       Color& colorLeft);
-  void triangleMirror(Image& image, vector<int>& right, vector<int>& left,
-                      Color& colorRight, Color& colorLeft);
-Player
-  // Mehtod we have to add
-  // We have to create this code.
+  int imageCounter_;
 
  public:
   // Constructors
@@ -52,7 +41,6 @@ class PlayerProjectile : public GameElement {
  private:
   double velocity_ = 10;
   // Private Member
-  void makeProjectile();
 
  public:
   // Constructors
