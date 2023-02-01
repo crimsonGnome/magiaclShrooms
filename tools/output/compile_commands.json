@@ -1,0 +1,27 @@
+[
+ {
+ "directory" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny",
+ "command" : "clang++ -std=c++17 main.cc -o main",
+ "file" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny/main.cc"
+ },
+ {
+ "directory" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny",
+ "command" : "clang++ -std=c++17 player.cc -o main",
+ "file" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny/player.cc"
+ },
+ {
+ "directory" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny",
+ "command" : "clang++ -std=c++17 opponent.cc -o main",
+ "file" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny/opponent.cc"
+ },
+ {
+ "directory" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny",
+ "command" : "clang++ -std=c++17 game_element.cc -o main",
+ "file" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny/game_element.cc"
+ },
+ {
+ "directory" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny",
+ "command" : "clang++ -std=c++17 game.cc -o main",
+ "file" : "/home/destinybonillas/project-1---milestone-5-joseph_and_destiny/game.cc"
+ },
+]
