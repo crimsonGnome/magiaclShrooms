@@ -26,7 +26,7 @@ using graphics::Image, std::cout, std::string, std::vector, std::unique_ptr;
 
 Game::Game() {
   this->gameScreen_.Initialize(800, 600);
-  Player crimsonGnome(375, 550);
+  Player crimsonGnome(375, 50);
   this->player_ = crimsonGnome;
 }
 
@@ -56,11 +56,11 @@ void Game::CreateOpponents() {
   // Init hoot hoots
 
   vector<unique_ptr<Opponent>>& opponentVector = opponent_;
-  unique_ptr<Opponent> owl0(new Opponent(200, 1));
-  unique_ptr<Opponent> owl1(new Opponent(300, 1));
-  unique_ptr<Opponent> owl2(new Opponent(400, 1));
-  unique_ptr<Opponent> owl3(new Opponent(500, 1));
-  unique_ptr<Opponent> owl4(new Opponent(600, 1));
+  unique_ptr<Opponent> owl0(new Opponent(200, 550));
+  unique_ptr<Opponent> owl1(new Opponent(300, 550));
+  unique_ptr<Opponent> owl2(new Opponent(400, 550));
+  unique_ptr<Opponent> owl3(new Opponent(500, 550));
+  unique_ptr<Opponent> owl4(new Opponent(600, 550));
 
   // Add hoot hoots to array
   opponentVector.push_back(move(owl0));
@@ -75,8 +75,6 @@ void Game::CreateOpponents() {
 void Game::Init() {
   // Setting New player position
   Image& image = GetGameScreen();
-  // player.SetX(x);
-  // player.SetY(y);
   image.AddMouseEventListener(*this);
   image.AddAnimationEventListener(*this);
 }
