@@ -19,7 +19,7 @@ using graphics::Image, graphics::Color, std::unique_ptr;
 
 // -------------------- * Constructors * ---------------------
 
-Opponent::Opponent() : GameElement(0, 0, 50, 50) {
+Opponent::Opponent() : GameElement(0, 0, 20, 50) {
   this->coordsUpdated_ = false;
   this->file_ = "opponentCharacter";
   this->launch_ = rand() % 25;
@@ -28,7 +28,7 @@ Opponent::Opponent() : GameElement(0, 0, 50, 50) {
 }
 
 Opponent::Opponent(int startingX, int startingY)
-    : GameElement(startingX, startingY, 50, 50) {
+    : GameElement(startingX, startingY, 20, 50) {
   this->coordsUpdated_ = true;
   this->file_ = "opponentCharacter";
   int temp = rand() % 25;
@@ -40,20 +40,13 @@ Opponent::Opponent(int startingX, int startingY)
 // Begin Draw Function
 void Opponent::makeOpponent() {
   // creating size of Opponent
-  Image opponent(50, 50);
+  Image opponent(25, 25);
 
   // code from milestone one to Draw Opponent
   // ***need to ADD implemnetation based on where opponent is on the screen***
-  opponent.DrawRectangle(5, 22, 25, 10, 186, 156, 115);
-  opponent.DrawRectangle(21, 22, 25, 10, 186, 156, 115);
-  opponent.DrawCircle(25, 24, 14, 241, 223, 199);
-  opponent.DrawCircle(17, 10, 10, 67, 64, 62);
-  opponent.DrawCircle(35, 10, 10, 67, 64, 62);
-  opponent.DrawCircle(17, 10, 5, 227, 57, 0);
-  opponent.DrawCircle(35, 10, 5, 227, 57, 0);
-  opponent.DrawLine(0, 0, 24, 9, 67, 64, 62, 8);
-  opponent.DrawLine(25, 10, 49, 0, 67, 64, 62, 8);
-  opponent.DrawRectangle(23, 14, 7, 11, 186, 156, 115);
+  opponent.DrawCircle(25, 24, 14, 22, 110, 227);
+
+
   for (int x = 0; x < 50; x++) {
     // There is no pixels to edit outside of this Range
     for (int y = 0; y < 50; y++) {
@@ -130,13 +123,13 @@ void Opponent::Move(const Image& image) {
   } else {
     this->x_ = x_ - velocity_;
   }
-  this->y_++;
+  this->y_--;
 }
 
 unique_ptr<OpponentProjectile> Opponent::LaunchProjectile() {
   if (counter_ % 25 == launch_) {
     unique_ptr<OpponentProjectile> opponent_projectile(
-        new OpponentProjectile(x_ + 23, y_ + 50));
+        new OpponentProjectile(x_ + 23, y_ - 50));
     counter_++;
     return move(opponent_projectile);
   } else {
@@ -230,7 +223,7 @@ void OpponentProjectile::Move(const Image& image) {
     is_active_ = false;
     return;
   }
-  this->truePosition_ = truePosition_ + velocity_ * time_ + 4.9 * time_ * time_;
+  this->truePosition_ = truePosition_ - velocity_ * time_ - 4.9 * time_ * time_;
   this->y_ = truePosition_;
-  this->velocity_ = velocity_ + 9.8 * time_;
+  this->velocity_ = velocity_ - 9.8 * time_;
 }
