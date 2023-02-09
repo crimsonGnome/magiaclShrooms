@@ -127,7 +127,7 @@ void Game::FilterIntersections() {
   // for opponent projectiles and player
   for (int i = 0; i < opponent_projectile.size(); i++) {
     if (player.IntersectsWith(opponent_projectile[i].get())) {
-      opponent_projectile[i]->SetIcrimsonGnomesActive(false);
+      opponent_projectile[i]->SetIsActive(false);
       player.SetIsActive(false);
       this->status_ = false;
     }
