@@ -19,7 +19,7 @@ using graphics::Image, graphics::Color, std::unique_ptr;
 
 // -------------------- * Constructors * ---------------------
 
-Opponent::Opponent() : GameElement(0, 0, 20, 50) {
+Opponent::Opponent() : GameElement(0, 0, 50, 50) {
   this->coordsUpdated_ = false;
   this->file_ = "opponentCharacter";
   this->launch_ = rand() % 25;
@@ -28,7 +28,7 @@ Opponent::Opponent() : GameElement(0, 0, 20, 50) {
 }
 
 Opponent::Opponent(int startingX, int startingY)
-    : GameElement(startingX, startingY, 20, 50) {
+    : GameElement(startingX, startingY, 50, 50) {
   this->coordsUpdated_ = true;
   this->file_ = "opponentCharacter";
   int temp = rand() % 25;
