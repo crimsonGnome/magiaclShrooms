@@ -39,6 +39,46 @@ Player::Player(int startingX, int startingY)
   this->file_ = "playerCharacter";
   // Draw Character
 }
+// Draw Character onto image
+void Player::Draw(Image& image) {
+  // Initilize Images
+  Image player;
+  // Load Robot and Hide it so it Doesnt display
+  player.Load(file_);
+  // ---------- Start of Variable Decleartion -----------
+  // Constant Hieghts
+  const int imgHeight = image.GetHeight();
+  const int imgWidth = image.GetWidth();
+  const int height = player.GetHeight();
+  const int width = player.GetWidth();
+
+  // ---------- End of Variable Decleartion -----------
+  // ------------ Copy Image -----------------------
+  for (int j = 0; j < height; j++) {
+    for (int i = 0; i < width; i++) {
+      // Get color of the Image
+      Color playerColor = player.GetColor(i, j);
+      // off setting by the middle to draw image
+      int xOffSet = x_ + i;
+      int yOffSet = y_ + j;
+
+      // Getting the image to draw on the location
+      // only Draw Image if its range
+      if ((xOffSet < imgWidth && xOffSet >= 0) &&
+          (yOffSet < imgHeight && yOffSet >= 0)) {
+        image.SetColor(xOffSet, yOffSet, playerColor);
+      } else {
+        continue;
+      }
+    }
+  }
+  this->coordsUpdated_ = false;
+}
+
+// Defining Move Function
+void Player::Move(const Image& image) {
+  // implememt later
+}
 //
 // ---------- *** PlayerProjectile Class Start *** ----------------
 // ---------------- ** Start of Public Methods * ---------------------
