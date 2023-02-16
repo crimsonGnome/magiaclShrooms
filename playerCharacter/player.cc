@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-#include "cpputils/graphics/image.h"
+#include "../cpputils/graphics/image.h"
 
 using graphics::Image, graphics::Color, std::cin, std::cout, std::endl,
     std::string, std::vector;
@@ -23,20 +23,24 @@ using graphics::Image, graphics::Color, std::cin, std::cout, std::endl,
 // ---------------- * Constructors * -------------------------
 
 // Default Constructor
-Player::Player() : GameElement(0, 0, 20, 50) {
+Player::Player() : GameElement(0, 0, 20, 50), playerImage_ ("playerCharacter/gnome1.bmp","playerCharacter/gnome2.bmp","playerCharacter/gnome3.bmp","playerCharacter/gnome4.bmp") {
   this->isEvil_ = false;
   this->coordsUpdated_ = false;
   this->file_ = "playerCharacter";
+  this->playerImageCycle_ = 0;
+  this->file_ = playerImage_[playerImageCycle_];
+
   // Draw Character
   
 }
 
 // Constructor
 Player::Player(int startingX, int startingY)
-    : GameElement(startingX, startingY, 20, 50) {
+    : GameElement(startingX, startingY, 20, 50), playerImage_ ("playerCharacter/gnome1.bmp","playerCharacter/gnome2.bmp","playerCharacter/gnome3.bmp","playerCharacter/gnome4.bmp") {
   this->isEvil_ = false;
   this->coordsUpdated_ = true;
-  this->file_ = "playerCharacter";
+  this->playerImageCycle_ = 0;
+  this->file_ = playerImage_[playerImageCycle_];
   // Draw Character
 }
 // Draw Character onto image
@@ -73,6 +77,11 @@ void Player::Draw(Image& image) {
     }
   }
   this->coordsUpdated_ = false;
+  // Code for icrementing the image
+  int temp = playerImageCycle_;
+  temp = (temp + 1) % 4;
+  this->playerImageCycle_ = temp;
+  this->file_ = playerImage_[playerImageCycle_];
 }
 
 // Defining Move Function
