@@ -17,7 +17,7 @@ Email: joseph.eggers@csu.fullerton.edu
 #include "cpputils/graphics/image.h"
 #include "cpputils/graphics/image_event.h"
 #include "opponent.h"
-#include "playerCharacter/player.h"
+#include "playerCharacter_/player.h"
 
 using std::vector, std::unique_ptr;
 

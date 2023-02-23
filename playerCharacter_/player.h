@@ -22,7 +22,7 @@ using graphics::Image, graphics::Color, std::string, std::vector;
 // Player
 class Player : public GameElement {
  private:
-  bool isEvil_;
+  unsigned int playerPhase_;
   vector<string> playerImage_;
   unsigned int playerImageCycle_;
  
