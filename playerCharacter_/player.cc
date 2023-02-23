@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-#include "cpputils/graphics/image.h"
+#include "../cpputils/graphics/image.h"
 
 using graphics::Image, graphics::Color, std::cin, std::cout, std::endl,
     std::string, std::vector;
@@ -23,20 +23,25 @@ using graphics::Image, graphics::Color, std::cin, std::cout, std::endl,
 // ---------------- * Constructors * -------------------------
 
 // Default Constructor
-Player::Player() : GameElement(0, 0, 20, 50) {
-  this->isEvil_ = false;
+Player::Player() : GameElement(0, 0, 20, 50), playerImage_ {"playerCharacter_/gnome1","playerCharacter_/gnome2","playerCharacter_/gnome3","playerCharacter_/gnome4"} {
   this->coordsUpdated_ = false;
-  this->file_ = "playerCharacter";
+  this->file_ = "gnome1";
+  this->playerImageCycle_ = 0;
+  this->file_ = playerImage_[playerImageCycle_];
+  
+  for(auto i = 0; i < playerImage_.size(); ++i){
+    cout << endl << playerImage_[i];
+  }
   // Draw Character
   
 }
 
 // Constructor
 Player::Player(int startingX, int startingY)
-    : GameElement(startingX, startingY, 20, 50) {
-  this->isEvil_ = false;
+    : GameElement(startingX, startingY, 20, 50), playerImage_ {"playerCharacter_/gnome1","playerCharacter_/gnome2","playerCharacter_/gnome3","playerCharacter_/gnome4"} {
   this->coordsUpdated_ = true;
-  this->file_ = "playerCharacter";
+  this->playerImageCycle_ = 0;
+  this->file_ = playerImage_[playerImageCycle_];
   // Draw Character
 }
 // Draw Character onto image
@@ -64,6 +69,7 @@ void Player::Draw(Image& image) {
 
       // Getting the image to draw on the location
       // only Draw Image if its range
+      //if(playerColor.Red() == 0 && playerColor.Green() == 0 && playerColor.Blue() == 0 ) continue;
       if ((xOffSet < imgWidth && xOffSet >= 0) &&
           (yOffSet < imgHeight && yOffSet >= 0)) {
         image.SetColor(xOffSet, yOffSet, playerColor);
@@ -73,6 +79,15 @@ void Player::Draw(Image& image) {
     }
   }
   this->coordsUpdated_ = false;
+  // Code for icrementing the image
+  this->playerPhase_ = playerPhase_ + 1;
+  if(playerPhase_ % 10 == 0){
+    int temp = playerImageCycle_;
+    temp = (temp + 1) % 4;
+    this->playerImageCycle_ = temp;
+    this->file_ = playerImage_[playerImageCycle_];
+  } 
+  if(playerPhase_ % 40 == 0) this->playerPhase_ = 0;
 }
 
 // Defining Move Function
@@ -126,6 +141,7 @@ void PlayerProjectile::Draw(Image& image) {
       int xOffSet = x_ + i;
       int yOffSet = y_ + j;
 
+      if(playerColor.Red() == 0 && playerColor.Green() == 0 && playerColor.Blue() == 0) continue;
       // Getting the image to draw on the location
       // only Draw Image if its range
       if ((xOffSet < imgWidth && xOffSet >= 0) &&

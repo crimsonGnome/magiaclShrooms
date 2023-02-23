@@ -14,16 +14,18 @@ Email: joseph.eggers@csu.fullerton.edu
 #include <string>
 #include <vector>
 
-#include "cpputils/graphics/image.h"
-#include "game_element.h"
-#include "opponent.h"
+#include "../cpputils/graphics/image.h"
+#include "../game_element.h"
+#include "../opponent.h"
 
 using graphics::Image, graphics::Color, std::string, std::vector;
 // Player
 class Player : public GameElement {
  private:
-  bool isEvil_;
-
+  unsigned int playerPhase_;
+  vector<string> playerImage_;
+  unsigned int playerImageCycle_;
+ 
   // Mehtod we have to add
   // We have to create this code.
 
