@@ -13,8 +13,8 @@ Email: joseph.eggers@csu.fullerton.edu
 
 #include <memory>
 
-#include "cpputils/graphics/image.h"
-#include "game_element.h"
+#include "../cpputils/graphics/image.h"
+#include "../game_element.h"
 
 using graphics::Image, std::string, std::unique_ptr, std::vector;
 

@@ -12,15 +12,15 @@ Email: joseph.eggers@csu.fullerton.edu
 #include <memory>
 #include <random>
 
-#include "cpputils/graphics/image.h"
-#include "game_element.h"
+#include "../cpputils/graphics/image.h"
+#include "../game_element.h"
 
 using graphics::Image, graphics::Color, std::unique_ptr, std::vector;
 
 // -------------------- * Constructors * ---------------------
 
-Opponent::Opponent() : GameElement(0, 0, 50, 50), playerImage_ {"greenboi1.bmp","greenboi2.bmp","greenboi3.bmp","greenboi4.bmp",
-                                                                "orangeboi1.bmp","orangeboi2.bmp","orangeboi3.bmp","orangeboi4.bmp"                         
+Opponent::Opponent() : GameElement(0, 0, 50, 50), playerImage_ {"opponentCharacter_/greenboi1.bmp","opponentCharacter_/greenboi2.bmp","opponentCharacter_/greenboi3.bmp","opponentCharacter_/greenboi4.bmp",
+                                                                "opponentCharacter_/orangeboi1.bmp","opponentCharacter_/orangeboi2.bmp","opponentCharacter_/orangeboi3.bmp","opponentCharacter_/orangeboi4.bmp"                         
   } {
   this->coordsUpdated_ = false;
   this->file_ = "greenboi1.bmp";
@@ -34,8 +34,8 @@ Opponent::Opponent() : GameElement(0, 0, 50, 50), playerImage_ {"greenboi1.bmp",
 }
 
 Opponent::Opponent(int startingX, int startingY)
-    : GameElement(startingX, startingY, 50, 50), playerImage_ {"greenboi1.bmp","greenboi2.bmp","greenboi3.bmp","greenboi4.bmp",
-                                                                "orangeboi1.bmp","orangeboi2.bmp","orangeboi3.bmp","orangeboi4.bmp"                         
+    : GameElement(startingX, startingY, 50, 50), playerImage_ {"opponentCharacter_/greenboi1.bmp","opponentCharacter_/greenboi2.bmp","opponentCharacter_/greenboi3.bmp","opponentCharacter_/greenboi4.bmp",
+                                                                "opponentCharacter_/orangeboi1.bmp","opponentCharacter_/orangeboi2.bmp","opponentCharacter_/orangeboi3.bmp","opponentCharacter_/orangeboi4.bmp"                         
   } {
   this->coordsUpdated_ = true;
   int temp = rand() % 25;
