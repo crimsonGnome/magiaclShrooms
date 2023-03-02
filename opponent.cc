@@ -19,24 +19,31 @@ using graphics::Image, graphics::Color, std::unique_ptr, std::vector;
 
 // -------------------- * Constructors * ---------------------
 
-Opponent::Opponent() : GameElement(0, 0, 50, 50), playerImage_ {"greenboi1.bmp","greenboi2.bmp","greenboi3.bmp","greenboi4.bmp"} {
+Opponent::Opponent() : GameElement(0, 0, 50, 50), playerImage_ {"greenboi1.bmp","greenboi2.bmp","greenboi3.bmp","greenboi4.bmp",
+                                                                "orangeboi1.bmp","orangeboi2.bmp","orangeboi3.bmp","orangeboi4.bmp"                         
+  } {
   this->coordsUpdated_ = false;
   this->file_ = "greenboi1.bmp";
   this->launch_ = rand() % 25;
+  this->playerImageCycle_ = rand() % 4;
+  this->playerPhase_ = playerImageCycle_ * rand() % 5;
+  this->colorModifier_ = rand() % 2;
+  this->file_ = playerImage_[playerImageCycle_ ];
   // Draw character
 
 }
 
 Opponent::Opponent(int startingX, int startingY)
-    : GameElement(startingX, startingY, 50, 50), playerImage_ {"greenboi1.bmp","greenboi2.bmp","greenboi3.bmp","greenboi4.bmp"} {
+    : GameElement(startingX, startingY, 50, 50), playerImage_ {"greenboi1.bmp","greenboi2.bmp","greenboi3.bmp","greenboi4.bmp",
+                                                                "orangeboi1.bmp","orangeboi2.bmp","orangeboi3.bmp","orangeboi4.bmp"                         
+  } {
   this->coordsUpdated_ = true;
-  this->file_ = "greenboi1.bmp";
   int temp = rand() % 25;
   this->launch_ = temp;
   this->playerImageCycle_ = rand() % 4;
   this->playerPhase_ = playerImageCycle_ * rand() % 10;
   this->colorModifier_ = rand() % 2;
-  this->file_ = playerImage_[playerImageCycle_ ];
+  this->file_ = playerImage_[playerImageCycle_ +  (4 * colorModifier_)];
   // Draw character
   
 }
@@ -74,14 +81,14 @@ void Opponent::Draw(Image& image) {
     }
   }
   this->coordsUpdated_ = false;
-  this->playerPhase_ = playerPhase_ + 2;
-  if(playerPhase_ % 10 == 0){
+  this->playerPhase_ = playerPhase_ + 1;
+  if(playerPhase_ % 5 == 0){
     int temp = playerImageCycle_;
     temp = (temp + 1) % 4;
     this->playerImageCycle_ = temp;
-    this->file_ = playerImage_[playerImageCycle_];
+    this->file_ = playerImage_[playerImageCycle_ +  (4 * colorModifier_)];
   } 
-  if(playerPhase_ % 40 == 0) this->playerPhase_ = 0;
+  if(playerPhase_ % 20 == 0) this->playerPhase_ = 0;
 }
 
 // Move Function Defined
