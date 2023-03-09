@@ -69,7 +69,9 @@ void Opponent::Draw(Image& image) {
       // off setting by the middle to draw image
       int xOffSet = x_ + i;
       int yOffSet = y_ + j;
-
+      if(playerColor.Red() == 255 && playerColor.Green() == 255 && playerColor.Blue() == 255){
+        continue;
+      }
       // Getting the image to draw on the location
       // only Draw Image if its range
       if ((xOffSet < imgWidth && xOffSet >= 0) &&
