@@ -25,14 +25,14 @@ using graphics::Image, std::cout, std::string, std::vector, std::unique_ptr;
 // ---------------- Start of Game Constructors ---------------------
 
 Game::Game() {
-  this->gameScreen_.Initialize(800, 600);
+  this->gameScreen_.Initialize(800, 700);
   Player crimsonGnome(375, 50);
   this->player_ = crimsonGnome;
 }
 
 Game::Game(int height, int width) {
   this->gameScreen_.Initialize(height, width);
-  Player crimsonGnome(375, 550);
+  Player crimsonGnome(375, 50);
   this->player_ = crimsonGnome;
 }
 // ---------------- End of Game Constructors -----------------------
@@ -202,7 +202,7 @@ void Game::LaunchProjectiles() {
 void Game::UpdateScreen() {
   Image& image = GetGameScreen();
   // Draw Screen white
-  image.DrawRectangle(0, 0, image.GetWidth(), image.GetHeight(), 255, 255, 255);
+  image.DrawRectangle(0, 0, image.GetWidth(), image.GetHeight(), 197, 234, 250);
 
   // Intialize vectors objects to loop over
   vector<unique_ptr<Opponent>>& opponent = GetOpponents();
@@ -276,13 +276,13 @@ void Game::OnMouseEvent(const graphics::MouseEvent& event) {
   Player& player = GetPlayer();
 
   if (event.GetMouseAction() == graphics::MouseAction::kDragged) {
-    if (x < 800 && x >= 0 && y >= 0 && y < 600) {
+    if (x < 800 && x >= 0 && y >= 0 && y < 700) {
       player.SetX(x - 10);
       player.SetY(y - 25);
       FirePlayerProjectile(player);
     }
   } else if (event.GetMouseAction() == graphics::MouseAction::kMoved) {
-    if (x < 800 && x >= 0 && y >= 0 && y < 600) {
+    if (x < 800 && x >= 0 && y >= 0 && y < 700) {
       player.SetX(x - 10);
       player.SetY(y - 25);
     }
