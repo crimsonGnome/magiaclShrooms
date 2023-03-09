@@ -14,6 +14,7 @@ Email: joseph.eggers@csu.fullerton.edu
 #include <memory>
 #include <string>
 #include <vector>
+#include <windows.h>
 
 #include "cpputils/graphics/image.h"
 #include "opponent.h"
@@ -77,6 +78,7 @@ void Game::Init() {
   Image& image = GetGameScreen();
   image.AddMouseEventListener(*this);
   image.AddAnimationEventListener(*this);
+  Music();
 }
 
 void Game::MoveGameElements() {
@@ -290,6 +292,12 @@ void Game::OnMouseEvent(const graphics::MouseEvent& event) {
     FirePlayerProjectile(player);
   }
 }
+
+void Game::Music(){
+
+ PlaySound("My_Song.wav",NULL,SND_FILENAME);
+
+ }
 
 void Game::Start() {
   Image& image = GetGameScreen();

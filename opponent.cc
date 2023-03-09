@@ -19,7 +19,8 @@ using graphics::Image, graphics::Color, std::unique_ptr;
 
 // -------------------- * Constructors * ---------------------
 
-Opponent::Opponent() : GameElement(0, 0, 50, 50) {
+Opponent::Opponent() : GameElement(0, 0, 50, 50)
+{
   this->coordsUpdated_ = false;
   this->file_ = "opponentCharacter";
   this->launch_ = rand() % 25;
@@ -28,7 +29,8 @@ Opponent::Opponent() : GameElement(0, 0, 50, 50) {
 }
 
 Opponent::Opponent(int startingX, int startingY)
-    : GameElement(startingX, startingY, 50, 50) {
+    : GameElement(startingX, startingY, 50, 50)
+{
   this->coordsUpdated_ = true;
   this->file_ = "opponentCharacter";
   int temp = rand() % 25;
@@ -38,28 +40,33 @@ Opponent::Opponent(int startingX, int startingY)
 }
 
 // Begin Draw Function
-void Opponent::makeOpponent() {
+void Opponent::makeOpponent()
+{
   // creating size of Opponent
   Image opponent(50, 50);
 
   // code from milestone one to Draw Opponent
   // ***need to ADD implemnetation based on where opponent is on the screen***
   opponent.DrawCircle(25, 24, 14, 10, 87, 189);
-  
 
-
-  for (int x = 0; x < 50; x++) {
+  for (int x = 0; x < 50; x++)
+  {
     // There is no pixels to edit outside of this Range
-    for (int y = 0; y < 50; y++) {
+    for (int y = 0; y < 50; y++)
+    {
       int red = opponent.GetRed(x, y);
       // If image red is == 255 then the picture is background then skip
-      if (red == 255) {
+      if (red == 255)
+      {
         continue;
-      } else {
+      }
+      else
+      {
         // random number
         int random = rand() % 2 + 1;
         // 1/4 chance of changing color
-        if (random % 2 == 0) {
+        if (random % 2 == 0)
+        {
           // get Colors, then randomize off base
           int green = opponent.GetGreen(x, y);
           int blue = opponent.GetBlue(x, y);
@@ -68,7 +75,9 @@ void Opponent::makeOpponent() {
           green = green + rand() % 15 + 1;
           Color tempColor(red, green, blue);
           opponent.SetColor(x, y, tempColor);
-        } else {
+        }
+        else
+        {
           continue;
         }
       }
@@ -78,7 +87,8 @@ void Opponent::makeOpponent() {
 }
 
 // code from milestone one to Draw Opponent
-void Opponent::Draw(Image& image) {
+void Opponent::Draw(Image &image)
+{
   // Initilize Images
   Image player;
   // Load Robot and Hide it so it Doesnt display
@@ -91,8 +101,10 @@ void Opponent::Draw(Image& image) {
   const int width = player.GetWidth();
   // ---------- End of Variable Decleartion -----------
   // ------------ Copy Image -----------------------
-  for (int j = 0; j < height; j++) {
-    for (int i = 0; i < width; i++) {
+  for (int j = 0; j < height; j++)
+  {
+    for (int i = 0; i < width; i++)
+    {
       // Get color of the Image
       Color playerColor = player.GetColor(i, j);
       // off setting by the middle to draw image
@@ -102,9 +114,12 @@ void Opponent::Draw(Image& image) {
       // Getting the image to draw on the location
       // only Draw Image if its range
       if ((xOffSet < imgWidth && xOffSet >= 0) &&
-          (yOffSet < imgHeight && yOffSet >= 0)) {
+          (yOffSet < imgHeight && yOffSet >= 0))
+      {
         image.SetColor(xOffSet, yOffSet, playerColor);
-      } else {
+      }
+      else
+      {
         continue;
       }
     }
@@ -113,28 +128,37 @@ void Opponent::Draw(Image& image) {
 }
 
 // Move Function Defined
-void Opponent::Move(const Image& image) {
-  if (IsOutOfBounds(image) == true) {
+void Opponent::Move(const Image &image)
+{
+  if (IsOutOfBounds(image) == true)
+  {
     is_active_ = false;
     return;
   }
 
-  if (movingRight_) {
+  if (movingRight_)
+  {
     this->x_ = x_ + velocity_;
-  } else {
+  }
+  else
+  {
     this->x_ = x_ - velocity_;
   }
   this->y_--;
 }
 
-unique_ptr<OpponentProjectile> Opponent::LaunchProjectile() {
-  if (counter_ % 25 == launch_) {
+unique_ptr<OpponentProjectile> Opponent::LaunchProjectile()
+{
+  if (counter_ % 25 == launch_)
+  {
     unique_ptr<OpponentProjectile> opponent_projectile(
         new OpponentProjectile(x_ - 23, y_ -
-         50));
+                                            50));
     counter_++;
     return move(opponent_projectile);
-  } else {
+  }
+  else
+  {
     counter_++;
     return nullptr;
   }
@@ -151,7 +175,8 @@ unique_ptr<OpponentProjectile> Opponent::LaunchProjectile() {
 
 // Beginning functions for OpponentProjectile
 // ---------------------- * Constructors * ----------------------
-OpponentProjectile::OpponentProjectile() : GameElement(0, 0, 5, 5) {
+OpponentProjectile::OpponentProjectile() : GameElement(0, 0, 5, 5)
+{
   this->coordsUpdated_ = false;
   this->file_ = "opponentProjectile";
   this->truePosition_ = 0;
@@ -161,7 +186,8 @@ OpponentProjectile::OpponentProjectile() : GameElement(0, 0, 5, 5) {
 
 // Constructor
 OpponentProjectile::OpponentProjectile(int startingX, int startingY)
-    : GameElement(startingX, startingY, 5, 5) {
+    : GameElement(startingX, startingY, 5, 5)
+{
   this->coordsUpdated_ = true;
   this->truePosition_ = startingY;
   this->file_ = "opponentProjectile";
@@ -170,7 +196,8 @@ OpponentProjectile::OpponentProjectile(int startingX, int startingY)
 }
 
 // Beginning Draw fucntion
-void OpponentProjectile::makeOpponentProjectile() {
+void OpponentProjectile::makeOpponentProjectile()
+{
   // creating size of OpponentProjectile
   Image opponent_projectile(5, 5);
 
@@ -184,7 +211,8 @@ void OpponentProjectile::makeOpponentProjectile() {
 
   opponent_projectile.SaveImageBmp(file_);
 }
-void OpponentProjectile::Draw(Image& image) {
+void OpponentProjectile::Draw(Image &image)
+{
   // Initilize Images
   Image player;
   // Load Robot and Hide it so it Doesnt display
@@ -198,8 +226,10 @@ void OpponentProjectile::Draw(Image& image) {
   const int width = player.GetWidth();
   // ---------- End of Variable Decleartion -----------
   // ------------ Copy Image -----------------------
-  for (int j = 0; j < height; j++) {
-    for (int i = 0; i < width; i++) {
+  for (int j = 0; j < height; j++)
+  {
+    for (int i = 0; i < width; i++)
+    {
       // Get color of the Image
       Color playerColor = player.GetColor(i, j);
       // off setting by the middle to draw image
@@ -209,9 +239,12 @@ void OpponentProjectile::Draw(Image& image) {
       // Getting the image to draw on the location
       // only Draw Image if its range
       if ((xOffSet < imgWidth && xOffSet >= 0) &&
-          (yOffSet < imgHeight && yOffSet >= 0)) {
+          (yOffSet < imgHeight && yOffSet >= 0))
+      {
         image.SetColor(xOffSet, yOffSet, playerColor);
-      } else {
+      }
+      else
+      {
         continue;
       }
     }
@@ -220,8 +253,10 @@ void OpponentProjectile::Draw(Image& image) {
 }
 
 // Move Function Defined
-void OpponentProjectile::Move(const Image& image) {
-  if (IsOutOfBounds(image) == true) {
+void OpponentProjectile::Move(const Image &image)
+{
+  if (IsOutOfBounds(image) == true)
+  {
     is_active_ = false;
     return;
   }

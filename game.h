@@ -31,6 +31,7 @@ class Game : public graphics::AnimationEventListener,
   Player player_;
   int score_ = 0;
   bool status_ = true;
+  string songFile_ = "";
 
   // Private Function
   void FirePlayerProjectile(Player&);
@@ -64,6 +65,7 @@ class Game : public graphics::AnimationEventListener,
   void OnMouseEvent(const graphics::MouseEvent& event);
   void RemoveInactive();
   void LaunchProjectiles();
+  void Music();
 };
 
 #endif
