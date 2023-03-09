@@ -12,69 +12,40 @@ Email: joseph.eggers@csu.fullerton.edu
 #include <memory>
 #include <random>
 
-#include "cpputils/graphics/image.h"
-#include "game_element.h"
+#include "../cpputils/graphics/image.h"
+#include "../game_element.h"
 
-using graphics::Image, graphics::Color, std::unique_ptr;
+using graphics::Image, graphics::Color, std::unique_ptr, std::vector;
 
 // -------------------- * Constructors * ---------------------
 
-Opponent::Opponent() : GameElement(0, 0, 50, 50) {
+Opponent::Opponent() : GameElement(0, 0, 50, 50), playerImage_ {"opponentCharacter_/greenboi1.bmp","opponentCharacter_/greenboi2.bmp","opponentCharacter_/greenboi3.bmp","opponentCharacter_/greenboi4.bmp",
+                                                                "opponentCharacter_/orangeboi1.bmp","opponentCharacter_/orangeboi2.bmp","opponentCharacter_/orangeboi3.bmp","opponentCharacter_/orangeboi4.bmp"                         
+  } {
   this->coordsUpdated_ = false;
-  this->file_ = "opponentCharacter";
+  this->file_ = "greenboi1.bmp";
   this->launch_ = rand() % 25;
+  this->playerImageCycle_ = rand() % 4;
+  this->playerPhase_ = playerImageCycle_ * rand() % 5;
+  this->colorModifier_ = rand() % 2;
+  this->file_ = playerImage_[playerImageCycle_ ];
   // Draw character
-  makeOpponent();
+
 }
 
 Opponent::Opponent(int startingX, int startingY)
-    : GameElement(startingX, startingY, 50, 50) {
+    : GameElement(startingX, startingY, 50, 50), playerImage_ {"opponentCharacter_/greenboi1.bmp","opponentCharacter_/greenboi2.bmp","opponentCharacter_/greenboi3.bmp","opponentCharacter_/greenboi4.bmp",
+                                                                "opponentCharacter_/orangeboi1.bmp","opponentCharacter_/orangeboi2.bmp","opponentCharacter_/orangeboi3.bmp","opponentCharacter_/orangeboi4.bmp"                         
+  } {
   this->coordsUpdated_ = true;
-  this->file_ = "opponentCharacter";
   int temp = rand() % 25;
   this->launch_ = temp;
+  this->playerImageCycle_ = rand() % 4;
+  this->playerPhase_ = playerImageCycle_ * rand() % 10;
+  this->colorModifier_ = rand() % 2;
+  this->file_ = playerImage_[playerImageCycle_ +  (4 * colorModifier_)];
   // Draw character
-  makeOpponent();
-}
-
-// Begin Draw Function
-void Opponent::makeOpponent() {
-  // creating size of Opponent
-  Image opponent(50, 50);
-
-  // code from milestone one to Draw Opponent
-  // ***need to ADD implemnetation based on where opponent is on the screen***
-  opponent.DrawCircle(25, 24, 14, 10, 87, 189);
   
-
-
-  for (int x = 0; x < 50; x++) {
-    // There is no pixels to edit outside of this Range
-    for (int y = 0; y < 50; y++) {
-      int red = opponent.GetRed(x, y);
-      // If image red is == 255 then the picture is background then skip
-      if (red == 255) {
-        continue;
-      } else {
-        // random number
-        int random = rand() % 2 + 1;
-        // 1/4 chance of changing color
-        if (random % 2 == 0) {
-          // get Colors, then randomize off base
-          int green = opponent.GetGreen(x, y);
-          int blue = opponent.GetBlue(x, y);
-          red = red + rand() % 14 + 1;
-          blue = blue + rand() % 15 + 1;
-          green = green + rand() % 15 + 1;
-          Color tempColor(red, green, blue);
-          opponent.SetColor(x, y, tempColor);
-        } else {
-          continue;
-        }
-      }
-    }
-  }
-  opponent.SaveImageBmp(file_);
 }
 
 // code from milestone one to Draw Opponent
@@ -110,6 +81,14 @@ void Opponent::Draw(Image& image) {
     }
   }
   this->coordsUpdated_ = false;
+  this->playerPhase_ = playerPhase_ + 1;
+  if(playerPhase_ % 5 == 0){
+    int temp = playerImageCycle_;
+    temp = (temp + 1) % 4;
+    this->playerImageCycle_ = temp;
+    this->file_ = playerImage_[playerImageCycle_ +  (4 * colorModifier_)];
+  } 
+  if(playerPhase_ % 20 == 0) this->playerPhase_ = 0;
 }
 
 // Move Function Defined

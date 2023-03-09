@@ -13,10 +13,10 @@ Email: joseph.eggers@csu.fullerton.edu
 
 #include <memory>
 
-#include "cpputils/graphics/image.h"
-#include "game_element.h"
+#include "../cpputils/graphics/image.h"
+#include "../game_element.h"
 
-using graphics::Image, std::string, std::unique_ptr;
+using graphics::Image, std::string, std::unique_ptr, std::vector;
 
 class OpponentProjectile : public GameElement {
  private:
@@ -44,14 +44,17 @@ class Opponent : public GameElement {
   int velocity_ = 4;
   bool movingRight_ = true;
   int launch_;
-  int counter_ = 0;
+  int counter_ = 0; // used for launching projectiles 
+  unsigned int playerPhase_;
+  vector<string> playerImage_;
+  unsigned int colorModifier_;
+  unsigned int playerImageCycle_;
 
  public:
   // Constructors
   Opponent();
   Opponent(int startingX, int startingY);
   void Draw(Image& image) override;
-  void makeOpponent();
   void SetMoveDirection(bool x) { this->movingRight_ = x; };
 
   int GetLaunch() { return launch_; };
