@@ -202,7 +202,7 @@ void Game::LaunchProjectiles() {
 void Game::UpdateScreen() {
   Image& image = GetGameScreen();
   // Draw Screen white
-  image.DrawRectangle(0, 0, image.GetWidth(), image.GetHeight(), 197, 234, 250);
+  image.DrawRectangle(0, 0, image.GetWidth(), image.GetHeight(), 255, 255, 255);
 
   // Intialize vectors objects to loop over
   vector<unique_ptr<Opponent>>& opponent = GetOpponents();
